@@ -29,9 +29,9 @@ class Parser:
     def generateFirst(self):
         isSetChanged = False
         for production in self._grammar.getProductions():
-            key=production.getLeft()
-            value=production.getRight()
-            v=list(value)
+            key = production.getLeft()
+            value = production.getRight()
+            v = list(value)
             copySet = self.firstSet[key]
             copySet = copySet.union(self.Loop(copySet, v, ['E']))
 
@@ -53,8 +53,6 @@ class Parser:
                     isSetChanged = True
 
 
-    def generateFollow(self):
-        pass
 
 
 g = Grammar("grammar1.txt")

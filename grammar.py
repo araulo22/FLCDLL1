@@ -31,7 +31,7 @@ class Grammar:
         with open(filename, 'r') as file:
             self._non_terminals = file.readline().strip().split(' ')
             self._terminals = file.readline().strip().split(' ')
-            self._start = file.readline().strip()
+            self._starting_symbol= file.readline().strip()
             for line in file:
                 production = line.strip().split(' ')
                 key = production[0].strip()
