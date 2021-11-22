@@ -3,7 +3,7 @@ class Grammar:
         self._non_terminals=[]
         self._terminals=[]
         self._starting_symbol=None
-        self._productions=[]
+        self._productions= {}
         self.read_from_file(filename)
 
     def read_from_file(self, filename):
@@ -17,9 +17,10 @@ class Grammar:
                     key = production[0].strip()
                     values = list(production[2].strip().split('|'))
                     for value in values:
-                        self._productions.append(
-                            (key, list(value))
-                        )
+                        if key in self._productions:
+                            self._productions[key].append(value)
+                        else:
+                            self._productions[key]=[value]
             file.close()
 
 
