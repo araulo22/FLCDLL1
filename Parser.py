@@ -52,8 +52,42 @@ class Parser:
                     self.firstSet[key] = copySet
                     isSetChanged = True
 
+    def generateFollow(self):
+        self.followSet[self._grammar.getStartSymbol()].add('E')
+        isSetChanged = False
+        for production in self._grammar.getProductions():
+            key = production.getLeft()
+            value = production.getRight()
+            v = list(value)
+            for i in range(len(v)):
+                if v[i] not in self._grammar.getNonTerminals():
+                    continue
+                copySet = self.followSet[v[i]]
+                if i < len(v) - 1:
+                    copySet = copySet.union(self.Loop(copySet, v[i + 1:], self.followSet[key]))
+                else:
+                    copySet = copySet.union(self.followSet[key])
+                if len(self.followSet[v[i]]) != len(copySet):
+                    self.followSet[v[i]] = copySet
+                    isSetChanged = True
 
-
+        while isSetChanged:
+            isSetChanged = False
+            for production in self._grammar.getProductions():
+                key = production.getLeft()
+                value = production.getRight()
+                v = list(value)
+                for i in range(len(v)):
+                    if v[i] not in self._grammar.getNonTerminals():
+                        continue
+                    copySet = self.followSet[v[i]]
+                    if i < len(v) - 1:
+                        copySet = copySet.union(self.Loop(copySet, v[i + 1:], self.followSet[key]))
+                    else:
+                        copySet = copySet.union(self.followSet[key])
+                    if len(self.followSet[v[i]]) != len(copySet):
+                        self.followSet[v[i]] = copySet
+                        isSetChanged = True
 
 g = Grammar("grammar1.txt")
 p = Parser(g)
