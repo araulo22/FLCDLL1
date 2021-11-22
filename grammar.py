@@ -9,6 +9,18 @@ class Grammar:
         self._productions= []
         self.read_from_file(filename)
 
+    def getNonTerminals(self):
+        return self._non_terminals
+
+    def getTerminals(self):
+        return self._terminals
+
+    def getStartSymbol(self):
+        return self._starting_symbol
+
+    def getProductions(self):
+        return self._productions
+
     def getProdForNT(self, nonTerm):
         return list(
             filter(
