@@ -13,7 +13,7 @@ class Production:
         rightStr = "["
         for i in range(len(self.getRight())):
             if i != len(self.getRight()) - 1:
-                rightStr += self.getRight()[i] + ", "
+                rightStr += self.getRight()[i]
             else:
                 rightStr += self.getRight()[i]
         rightStr += "]"
