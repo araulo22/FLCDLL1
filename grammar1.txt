@@ -1,6 +1,6 @@
 S A B
 0 1
 S
-S -> 1S|1A
-A -> 1A|0|Epsilon
+S -> S|A
+A -> A|0|E
 B -> 0

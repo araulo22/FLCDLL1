@@ -29,9 +29,9 @@ class Grammar:
 
     def read_from_file(self, filename):
         with open(filename, 'r') as file:
-            self.__nonTerminals = file.readline().strip().split(' ')
-            self.__terminals = file.readline().strip().split(' ')
-            self.__start = file.readline().strip()
+            self._non_terminals = file.readline().strip().split(' ')
+            self._terminals = file.readline().strip().split(' ')
+            self._start = file.readline().strip()
             for line in file:
                 production = line.strip().split(' ')
                 key = production[0].strip()
