@@ -134,6 +134,43 @@ class Parser:
         # rule 3
         self._table[('$', '$')] = ('acc', -1)
 
+    def evaluateSequence(self, sequence):
+        w = list(sequence)
+        stack = [self._grammar.getStartSymbol(), '$']
+        output = ""
+        while stack[0] != '$' and w:
+            print(w, stack)
+            # pop operation
+            if w[0] == stack[0]:
+                w = w[1:]
+                stack.pop(0)
+            else:
+                x = w[0]
+                a = stack[0]
+                # error operation
+                if (a, x) not in self._table.keys():
+                    return None
+                # push operation
+                else:
+                    stack.pop(0)
+                    rhs, index = self._table[(a, x)]
+                    rhs = list(rhs)
+                    for i in range(len(rhs) - 1, -1, -1):
+                        if rhs[i] != 'E':
+                            stack.insert(0, rhs[i])
+                    output += str(index) + " "
+            print(output)
+        # error operation
+        if stack[0] == '$' and w:
+            return None
+        # push or accept operation
+        elif not w:
+            while stack[0] != '$':
+                a = stack[0]
+                if (a, '$') in self._table.keys():
+                    output += str(self._table[(a, '$')][1]) + " "
+                stack.pop(0)
+            return output
 
 g = Grammar("grammar1.txt")
 p = Parser(g)
