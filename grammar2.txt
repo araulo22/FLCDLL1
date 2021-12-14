@@ -1,0 +1,25 @@
+program decllist cmpdstmt declaration lidentifier type type1 arraydecl dictdecl stmtlist stmt simplstmt structstmt assignstmt iostmt expression term factor ifstmt whilestmt condition relation
+identificator constanta array constant of var integer real boolean begin end read write for to do if then else and or not : ; , . + * ( ) [ ] - < > = := >= <= id
+program
+program -> var decllist;cmpdstmt|asdf
+decllist -> declaration|declaration;decllist
+declaration -> lidentifier:type
+lidentifier -> id|id,lidentifier;
+type1 -> boolean|char|integer
+arraydecl -> array[constant] of type1
+dictdecl -> dict{type1:type1}
+type -> type1|arraydecl|dictdecl
+cmpdstmt -> begin stmtlist end
+stmtlist -> stmt|stmt;stmtlist
+stmt -> simplstmt|structstmt
+simplstmt -> assignstmt|iostmt
+assignstmt -> identifier:=expression
+expression -> expression+term|expression-term|term
+term -> term*factor|term/factor|factor
+factor -> (expression)|identifier
+iostmt -> read(identifier)|write(identifier)|write(expression)
+structstmt -> cmpdstmt|ifstmt|whilestmt
+ifstmt -> if condition then stmt|if condition then stmt else stmt
+whilestmt -> while condition do stmt
+condition -> expression relation expression|expression relation constant
+relation -> <|<=|=|<>|>=|>

@@ -1,0 +1,6 @@
+VAR
+N :INTEGER;
+BEGIN
+N:=0;
+WRITE(N)
+END

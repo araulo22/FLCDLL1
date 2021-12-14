@@ -27,20 +27,25 @@ class Grammar:
                 lambda x: x.getLeft() == nonTerm, self._productions)
         )
 
+    def getProductionByIndex(self, index):
+        for p in self._productions:
+            if p.getNumber() == int(index):
+                    return p
+
     def read_from_file(self, filename):
         with open(filename, 'r') as file:
             self._non_terminals = file.readline().strip().split(' ')
             self._terminals = file.readline().strip().split(' ')
             self._starting_symbol = file.readline().strip()
-            i=1
+            i = 1
             for line in file:
                 production = line.strip().split(' ')
                 key = production[0].strip()
                 values = list(production[2].strip().split('|'))
-                for value in values:
+                for rhs in values:
                     self._productions.append(
-                        Production(key, value, i)
+                        Production(key, rhs, i)
                     )
-                    i+=1
+                    i += 1
 
         file.close()
