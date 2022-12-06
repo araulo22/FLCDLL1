@@ -16,7 +16,7 @@ class ParserOutput:
     def displayTable(self):
         print("Index, info, parent, leftsibling")
         for row in self.rows:
-            print(str(row.index)+str(row.information)+str(row.parent)+str(row.leftsibling))
+            print(str(row.index)+"   "+str(row.information)+"   "+str(row.parent)+"   "+str(row.leftsibling))
 
     def writeToFile(self):
         f=open(self.filename)

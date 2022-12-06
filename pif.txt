@@ -1,0 +1,15 @@
+VAR
+identificator , (18, 0)
+:
+INTEGER
+;
+BEGIN
+identificator , (18, 0)
+:=
+constanta , (18, 0)
+;
+WRITE
+(
+identificator , (18, 0)
+)
+END
